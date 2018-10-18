@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.ppt.temp_coer.app.Temp;
 import com.example.ppt.temp_ec.icon.FontTempModel;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.orhanobut.logger.AndroidLogAdapter;
 
 
 public class ExampleApp extends Application {
@@ -15,6 +16,7 @@ public class ExampleApp extends Application {
                 .withHost("sddsf")
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontTempModel())
+                .withLogger(new AndroidLogAdapter())
                 .configure();
 
     }
@@ -25,4 +27,5 @@ public class ExampleApp extends Application {
 //                .setSupportSP(false)
 //                .setSupportSubunits(Subunits.MM);
 //    }
+
 }

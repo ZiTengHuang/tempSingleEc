@@ -6,18 +6,21 @@ import java.util.HashMap;
 
 public final class Temp {
 
-
     public static Configuratro init(Context context) {
-        getConfigs().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
+        getConfiguration().getInstence().getConfigs().put(ConfigType.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configuratro.getInstence();
     }
 
 
-    private static HashMap<String, Object> getConfigs() {
-        return Configuratro.getInstence().getConfigs();
+    public static <T> T getConfigurations(Object key) {
+        return getConfiguration().getConfiguration(key);
+    }
+
+    private static Configuratro getConfiguration() {
+        return Configuratro.getInstence();
     }
 
     public static Context getApplicationContext() {
-        return (Context) getConfigs().get(ConfigType.APPLICATION_CONTEXT.name());
+        return getConfigurations(ConfigType.APPLICATION_CONTEXT);
     }
 }

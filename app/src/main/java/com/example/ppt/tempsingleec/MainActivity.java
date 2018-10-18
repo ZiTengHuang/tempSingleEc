@@ -1,12 +1,11 @@
 package com.example.ppt.tempsingleec;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import com.example.ppt.temp_coer.activitys.ProxyActivity;
+import com.example.ppt.temp_coer.dalegates.TempDalegate;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ProxyActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public TempDalegate setRootDalegate() {
+        return new ExampleDalegate();
     }
 }

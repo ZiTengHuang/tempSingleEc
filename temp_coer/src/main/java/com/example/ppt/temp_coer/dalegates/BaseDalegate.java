@@ -17,24 +17,24 @@ public abstract class BaseDalegate extends SwipeBackFragment {
 
     public abstract Object setLayout();
 
-    public abstract void onBinderView(@Nullable Bundle savedInstanceState, View rootView);
+    public abstract void onBindView(@Nullable Bundle savedInstanceState, View view);
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View rootView = null;
         if (setLayout() instanceof Integer) {
             rootView = inflater.inflate((Integer) setLayout(), container, false);
         } else if (setLayout() instanceof View) {
             rootView = (View) setLayout();
+        } else {
+            throw new ClassCastException("no rid no view");
         }
-        if (rootView != null) {
-            mUnbinder = ButterKnife.bind(rootView);
-            onBinderView(savedInstanceState, rootView);
-        }
+        mUnbinder = ButterKnife.bind(this, rootView);
+        onBindView(savedInstanceState, rootView);
         return rootView;
     }
+
 
     @Override
     public void onDestroyView() {

@@ -2,6 +2,9 @@ package com.example.ppt.temp_coer.app;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.LogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,16 +12,16 @@ import java.util.HashMap;
 public class Configuratro {
 
 
-    private static final HashMap<String, Object> CONFIGS = new HashMap<>();
+    private static final HashMap<Object, Object> CONFIGS = new HashMap<>();
 
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
-    private Configuratro() {
+    private final void Configuratro() {
         initIcons();
-        CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
+        CONFIGS.put(ConfigType.CONFIG_READY, false);
     }
 
-    final HashMap<String, Object> getConfigs() {
+    final HashMap<Object, Object> getConfigs() {
         return CONFIGS;
     }
 
@@ -31,12 +34,12 @@ public class Configuratro {
     }
 
     public final Configuratro withHost(String host) {
-        CONFIGS.put(ConfigType.API_HOST.name(), host);
+        CONFIGS.put(ConfigType.API_HOST , host);
         return this;
     }
 
     public final void configure() {
-        CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
+        CONFIGS.put(ConfigType.CONFIG_READY, true);
     }
 
     private void checkConfiguration() {
@@ -44,6 +47,10 @@ public class Configuratro {
         if (isReady) {
             throw new RuntimeException("还没配置完成");
         }
+    }
+    public Configuratro withLogger(LogAdapter logger) {
+        Logger.addLogAdapter(logger);
+        return this;
     }
 
     private void initIcons() {
