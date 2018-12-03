@@ -2,7 +2,8 @@ package com.example.ppt.tempsingleec;
 
 import android.app.Application;
 
-import com.example.ppt.temp_coer.app.Temp;
+import com.example.ppt.temp_coer.app.Mike;
+import com.example.ppt.temp_coer.net.api.Constants;
 import com.example.ppt.temp_ec.icon.FontTempModel;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -12,12 +13,12 @@ public class ExampleApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Temp.init(this)
-                .withHost("sddsf")
+        Mike.init(this)
+                .withApiHost(Constants.SERVER)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontTempModel())
                 .withLogger(new AndroidLogAdapter())
-                .configure();
+                .configurator();
 
     }
 

@@ -25,4 +25,5 @@ public enum  TempIcons implements Icon {
     public char character() {
         return character;
     }
+
 }

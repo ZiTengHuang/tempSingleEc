@@ -1,11 +1,14 @@
 package com.example.ppt.tempsingleec;
 
-import com.example.ppt.temp_coer.activitys.ProxyActivity;
-import com.example.ppt.temp_coer.dalegates.TempDalegate;
+import com.example.ppt.temp_coer.activitys.PorxyActivity;
+import com.example.ppt.temp_coer.dalegates.MikeDalegate;
+import com.example.ppt.temp_coer.tempDalegate;
+import com.example.ppt.temp_ec.launcher.LauncherDalegate;
 
-public class MainActivity extends ProxyActivity {
+public class MainActivity extends PorxyActivity {
+
     @Override
-    public TempDalegate setRootDalegate() {
+    public MikeDalegate setRootDalegate() {
         return new ExampleDalegate();
     }
 }
