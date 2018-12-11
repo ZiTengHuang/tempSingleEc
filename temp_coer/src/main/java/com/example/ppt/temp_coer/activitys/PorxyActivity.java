@@ -8,7 +8,9 @@ import android.support.v7.widget.ContentFrameLayout;
 import com.example.ppt.temp_coer.R;
 import com.example.ppt.temp_coer.dalegates.MikeDalegate;
 import com.example.ppt.temp_coer.net.RestClient;
+import com.example.ppt.temp_coer.net.RestCreator;
 import com.example.ppt.temp_coer.net.RestService;
+import com.example.ppt.temp_coer.net.callback.IRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,5 +47,4 @@ public abstract class PorxyActivity extends SupportActivity {
         System.gc();
         System.runFinalization();
     }
-
 }

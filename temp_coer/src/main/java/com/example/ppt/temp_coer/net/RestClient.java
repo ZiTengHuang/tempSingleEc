@@ -84,6 +84,7 @@ public class RestClient {
         if (REQUEST != null) {
             REQUEST.onRequestStart();
         }
+
         if (LOADER_MSG != null || !TextUtils.isEmpty(LOADER_MSG)) {
             TipDialogCreator.showTipDailogLoading(CONTEXT, LOADER_STYLE, LOADER_MSG);
         } else if (!TextUtils.isEmpty(LOADER_MSG)) {
@@ -163,6 +164,11 @@ public class RestClient {
     }
 
     public final void upload() {
-        new DownloadHandler(URL,DOWNLOAD_DIR,EXTENSION,FILENAME,SUCCESS,ERROR,REQUEST,FAILURE).handleDownload();
+        request(HttpMethod.UPLOAD);
+    }
+
+    public final void download() {
+        new DownloadHandler(URL, DOWNLOAD_DIR, EXTENSION, FILENAME, SUCCESS, ERROR, REQUEST, FAILURE).handleDownload();
+
     }
 }

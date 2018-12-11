@@ -1,11 +1,12 @@
 package com.example.ppt.temp_coer.net.download;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
-
-import com.example.ppt.temp_coer.net.callback.IError;
+import com.example.ppt.temp_coer.app.Mike;
+import com.example.ppt.temp_coer.net.callback.IRequest;
 import com.example.ppt.temp_coer.net.callback.ISuccess;
 import com.example.ppt.temp_coer.utils.file.FileUtil;
-
 import java.io.File;
 import java.io.InputStream;
 
@@ -14,11 +15,11 @@ import okhttp3.ResponseBody;
 public class SaveFileTask extends AsyncTask<Object, Void, File> {
 
     private final ISuccess SUCCESS;
-    private final IError ERROR;
+    private final IRequest REQUEST;
 
-    public SaveFileTask(ISuccess success, IError error) {
+    public SaveFileTask(ISuccess success, IRequest request) {
         SUCCESS = success;
-        ERROR = error;
+        REQUEST = request;
     }
 
     @Override
@@ -48,6 +49,19 @@ public class SaveFileTask extends AsyncTask<Object, Void, File> {
         if (SUCCESS != null) {
             SUCCESS.onSuccess(file.getPath());
         }
-        if ()
+        if (REQUEST != null) {
+            REQUEST.onRequestEnd();
+        }
+        autoInstallApk(file);
+    }
+
+    private void autoInstallApk(File file) {
+        if (FileUtil.getExtension(file.getPath()).equals("apk")) {
+            final Intent install = new Intent();
+            install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            install.setAction(Intent.ACTION_VIEW);
+            install.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            Mike.getApplicationContext().startActivity(install);
+        }
     }
 }

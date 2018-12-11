@@ -4,12 +4,18 @@ package com.example.ppt.temp_coer.net;
 import com.example.ppt.temp_coer.app.ConfigKeys;
 import com.example.ppt.temp_coer.app.Mike;
 import com.example.ppt.temp_coer.logutils.LogInterceptor;
+import com.example.ppt.temp_coer.net.Rx.RxRestService;
+import com.example.ppt.temp_coer.utils.toast.ToastCreator;
 
+import java.util.ArrayList;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RestCreator {
@@ -33,21 +39,43 @@ public class RestCreator {
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(OKHttpHolder.OK_HTTP_CLIENT)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
     }
 
     private static final class OKHttpHolder {
         private static final int TIME_OUT = 60;
-        private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
+        private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
+        private static final ArrayList<Interceptor> INTERCEPTORS = Mike.getConfiguration(ConfigKeys.INTERCEPTOR);
+
+        private static OkHttpClient.Builder addInterceptors() {
+            if (INTERCEPTORS != null || !INTERCEPTORS.isEmpty()) {
+                  for (Interceptor interceptors : INTERCEPTORS) {
+                      com.orhanobut.logger.Logger.i("=======================aa");
+                    BUILDER.addInterceptor(interceptors);
+                }
+            }
+            return BUILDER;
+        }
+
+        private static final OkHttpClient OK_HTTP_CLIENT = addInterceptors()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .addInterceptor(new LogInterceptor())
                 .build();
     }
 
     private static final class RestServiceHolder {
         private static final RestService REST_SERVICE =
                 RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
+    }
+
+    public static RxRestService getRxRestService() {
+        return RxRestServiceHolder.REST_SERVICE;
+    }
+
+    private static final class RxRestServiceHolder {
+        private static final RxRestService REST_SERVICE =
+                RetrofitHolder.RETROFIT_CLIENT.create(RxRestService.class);
     }
 
 }

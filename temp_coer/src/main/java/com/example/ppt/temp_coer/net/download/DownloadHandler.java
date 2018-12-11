@@ -1,5 +1,7 @@
 package com.example.ppt.temp_coer.net.download;
 
+import android.os.AsyncTask;
+
 import com.example.ppt.temp_coer.net.RestCreator;
 import com.example.ppt.temp_coer.net.callback.IError;
 import com.example.ppt.temp_coer.net.callback.IFailure;
@@ -43,19 +45,35 @@ public class DownloadHandler {
     }
 
     public final void handleDownload() {
-          if (REQUEST!=null){
-              REQUEST.onRequestStart();
-          }
-          RestCreator.getRestService().download(URL,PARAMS).enqueue(new Callback<ResponseBody>() {
-              @Override
-              public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+        if (REQUEST != null) {
+            REQUEST.onRequestStart();
+        }
+        RestCreator.getRestService().download(URL, PARAMS).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-              }
+                final ResponseBody responseBody = response.body();
 
-              @Override
-              public void onFailure(Call<ResponseBody> call, Throwable t) {
+                final SaveFileTask saveFileTask = new SaveFileTask(SUCCESS, REQUEST);
+                saveFileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, DOWNLOAD_DIR, EXTENSION, responseBody, FILENAME);
+                //一定要判断asynctask是否结束了，否则会文件下载不全
+                if (saveFileTask.isCancelled()) {
+                    if (REQUEST != null) {
+                        REQUEST.onRequestEnd();
+                    }
+                } else {
+                    if (ERROR != null) {
+                        ERROR.onError(response.message(), response.code());
+                    }
+                }
+            }
 
-              }
-          });
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                if (FAILURE != null) {
+                    FAILURE.onFailure();
+                }
+            }
+        });
     }
 }

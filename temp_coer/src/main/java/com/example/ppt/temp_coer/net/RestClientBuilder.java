@@ -32,6 +32,7 @@ public class RestClientBuilder {
 
     //构造方法不添加任何关键字，为默认关键字 只允许同包的来用
     RestClientBuilder() {
+
     }
 
     //构造者无非做一些传值的操作，可以不需要做改变  so 我们一般设置为final
