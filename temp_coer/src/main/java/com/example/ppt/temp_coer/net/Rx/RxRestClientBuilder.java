@@ -51,8 +51,6 @@ public class RxRestClientBuilder {
     }
 
 
-
-
     public final RxRestClientBuilder file(String file) {
         this.mFile = new File(file);
         return this;
