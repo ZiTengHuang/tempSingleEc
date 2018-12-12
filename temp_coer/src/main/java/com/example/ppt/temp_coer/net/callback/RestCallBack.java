@@ -42,7 +42,6 @@ public class RestCallBack implements Callback<String> {
             }
         }
         stopLoader();
-
     }
 
     @Override
@@ -61,7 +60,7 @@ public class RestCallBack implements Callback<String> {
             HANDLER.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    TipDialogCreator.stopTipDialog();
+                        TipDialogCreator.stopTipDialog();
                 }
             }, 1000);
         }

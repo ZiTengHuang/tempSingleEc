@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+
  android {
     compileSdkVersion 28
     defaultConfig {
@@ -20,12 +21,12 @@ apply plugin: 'com.jakewharton.butterknife'
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api 'com.android.support:appcompat-v7:28.0.0'
-    api 'com.android.support.constraint:constraint-layout:1.1.3'
+     api 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation project(':temp_annotations')
     //https://github.com/JoanZapata/android-iconify 图标
     api('com.joanzapata.iconify:android-iconify-fontawesome:2.2.2') {
@@ -53,9 +54,20 @@ dependencies {
     api 'com.muddzdev:styleabletoast:2.2.0'
 
     api 'com.wuhenzhizao:titlebar:1.1.3'
+    //glide
     api 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    //rxjava
     api "io.reactivex.rxjava2:rxjava:2.2.4"
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    // rxjava 对retrofit的转换器
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    //design
+    api 'com.android.support:support-v4:28.0.0-rc02'
+    api 'com.android.support:design:28.0.0-rc02'
+    api 'com.android.support:appcompat-v7:28.0.0-rc02'
+    //数据库
+    api 'org.greenrobot:greendao:3.2.2'
+    api 'org.greenrobot:greendao-generator:3.2.2'
+
 }

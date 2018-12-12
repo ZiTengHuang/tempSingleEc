@@ -85,13 +85,14 @@ public class RestClient {
             REQUEST.onRequestStart();
         }
 
+        if (CONTEXT!=null){
         if (LOADER_MSG != null || !TextUtils.isEmpty(LOADER_MSG)) {
             TipDialogCreator.showTipDailogLoading(CONTEXT, LOADER_STYLE, LOADER_MSG);
         } else if (!TextUtils.isEmpty(LOADER_MSG)) {
             TipDialogCreator.showTipDailogLoading(CONTEXT, LOADER_MSG);
         } else {
-            TipDialogCreator.showTipDailogLoading(CONTEXT, LOADER_STYLE);
-        }
+            TipDialogCreator.showTipDailogLoading(CONTEXT);
+        }}
         switch (method) {
             case GET:
                 call = restService.get(URL, PARAMS);
@@ -142,9 +143,7 @@ public class RestClient {
             }
             request(HttpMethod.POST_RAW);
         }
-
-        request(HttpMethod.POST);
-    }
+     }
 
     public final void put() {
         if (REQUESTBODY == null) {
@@ -156,7 +155,7 @@ public class RestClient {
             request(HttpMethod.PUT_RAW);
         }
 
-        request(HttpMethod.POST);
+
     }
 
     public final void delete() {

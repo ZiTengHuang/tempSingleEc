@@ -3,30 +3,94 @@ package com.example.ppt.tempsingleec;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
-
-import com.example.ppt.temp_coer.R2;
 import com.example.ppt.temp_coer.dalegates.MikeDalegate;
-import com.example.ppt.temp_ec.test.BasicTestDalegate;
-import butterknife.BindView;
-import butterknife.OnClick;
+import com.example.ppt.temp_coer.net.RestClient;
+import com.example.ppt.temp_coer.net.Rx.RxRestClient;
+import com.example.ppt.temp_coer.net.api.Constants;
+import com.example.ppt.temp_coer.net.callback.IError;
+import com.example.ppt.temp_coer.net.callback.ISuccess;
+import com.example.ppt.temp_coer.utils.dialog.tipdialog.TipDialogCreator;
+import com.orhanobut.logger.Logger;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class ExampleDalegate extends MikeDalegate {
 
 
-    @BindView(R2.id.temp_id)
-    Button tempOncklick;
 
     @Override
     public Object setLayout() {
-        return R.layout.temp_daltegate;
+        return R.layout.delegate_sign_up;
     }
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-//         RestClient.builder()
-//                .url(Constants.WEBINDEX)
+         RestClient.builder()
+                .url(Constants.LOGIN)
+                 .params("username", "13049337194")
+                 .params("userpass", "198541")
+                .loader(getContext())
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Logger.i(response);
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(String msg, int code) {
+                        Logger.i(msg + "===============" + code);
+                    }
+                })
+                .builder()
+                .get();
+        RestClient.builder()
+                .url(Constants.LOGIN)
+                .params("username", "13049337194")
+                .params("userpass", "198541")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Logger.i(response);
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(String msg, int code) {
+                        Logger.i(msg + "===============" + code);
+                    }
+                })
+                .builder()
+                .get();
+
+        RestClient.builder()
+                .url(Constants.LOGIN)
+                .params("username", "13049337194")
+                .params("userpass", "198541")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Logger.i(response);
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(String msg, int code) {
+                        Logger.i(msg + "===============" + code);
+                    }
+                })
+                .builder()
+                .get();
+
+//        RestClient.builder()
+//                .url(Constants.LOGIN)
 //                .loader(getContext())
+//
+//                .params("username", "13049337194")
+//                .params("userpass", "198541")
 //                .success(new ISuccess() {
 //                    @Override
 //                    public void onSuccess(String response) {
@@ -36,12 +100,12 @@ public class ExampleDalegate extends MikeDalegate {
 //                .error(new IError() {
 //                    @Override
 //                    public void onError(String msg, int code) {
-//                        Logger.i(msg + "===============" + code);
+//
 //                    }
 //                })
+//
 //                .builder()
-//                .get();
-
+//                .post();
 //        RxRestClient.builder()
 //                .url(Constants.WEBINDEX)
 //                .loader(getContext())
@@ -71,16 +135,6 @@ public class ExampleDalegate extends MikeDalegate {
 //                    }
 //                });
 
-    }
-
-    @OnClick(R2.id.temp_id)
-    public void setTempOncklick() {
-
-    }
-
-    @OnClick(R2.id.yueshu_id)
-    public void yueshuonclick() {
-        start(new BasicTestDalegate(), SINGLETASK);
     }
 }
 

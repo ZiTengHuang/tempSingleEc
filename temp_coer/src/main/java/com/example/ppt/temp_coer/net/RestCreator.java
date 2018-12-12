@@ -51,14 +51,12 @@ public class RestCreator {
 
         private static OkHttpClient.Builder addInterceptors() {
             if (INTERCEPTORS != null || !INTERCEPTORS.isEmpty()) {
-                  for (Interceptor interceptors : INTERCEPTORS) {
-                      com.orhanobut.logger.Logger.i("=======================aa");
+                for (Interceptor interceptors : INTERCEPTORS) {
                     BUILDER.addInterceptor(interceptors);
                 }
             }
             return BUILDER;
         }
-
         private static final OkHttpClient OK_HTTP_CLIENT = addInterceptors()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .build();

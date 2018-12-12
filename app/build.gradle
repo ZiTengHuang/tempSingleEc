@@ -16,11 +16,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':temp_ec')
     annotationProcessor project(':temp_compiler')
-
+    //测试用例能再谷歌浏郎器查看到数据库和映射的界面
+    implementation 'com.facebook.stetho:stetho:1.4.2'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.4.2'
 }

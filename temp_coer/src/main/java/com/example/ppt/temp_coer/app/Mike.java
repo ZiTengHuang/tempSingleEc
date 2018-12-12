@@ -1,6 +1,5 @@
 package com.example.ppt.temp_coer.app;
 
-import android.app.Application;
 import android.content.Context;
 
 public class Mike {

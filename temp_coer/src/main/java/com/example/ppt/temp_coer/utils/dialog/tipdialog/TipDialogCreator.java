@@ -12,7 +12,6 @@ public class TipDialogCreator {
 
     private static final String WORK_MSG = "正在加载..";
 
-    private static final Handler HANDLER = new Handler();
 
     public static final int DEFAULT_ICON_TYPE_LOADING = QMUITipDialog.Builder.ICON_TYPE_LOADING;
 
@@ -55,6 +54,6 @@ public class TipDialogCreator {
         if (tipDailog.isShowing()) {
             tipDailog.dismiss();
             tipDailog.cancel();
-        }
+         }
     }
 }

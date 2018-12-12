@@ -41,6 +41,9 @@ public abstract class PorxyActivity extends SupportActivity {
             loadRootFragment(R.id.dalegate_conteinar, setRootDalegate());
         }
     }
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
