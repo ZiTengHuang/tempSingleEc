@@ -1,5 +1,6 @@
 package com.example.ppt.temp_ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -8,13 +9,12 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.Toast;
 
-
 import com.example.ppt.temp_coer.dalegates.MikeDalegate;
 import com.example.ppt.temp_coer.net.RestClient;
 import com.example.ppt.temp_coer.net.api.Constants;
 import com.example.ppt.temp_coer.net.callback.IError;
-import com.example.ppt.temp_coer.net.callback.IRequest;
 import com.example.ppt.temp_coer.net.callback.ISuccess;
+import com.example.ppt.temp_coer.utils.toast.ToastCreator;
 import com.example.ppt.temp_ec.R;
 import com.example.ppt.temp_ec.R2;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -24,8 +24,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class SignInDelegate extends MikeDalegate {
-
-
     @BindView(R2.id.edit_sign_in_phone)
     TextInputEditText editSignInPhone;
     @BindView(R2.id.edit_sign_in_password)
@@ -36,6 +34,8 @@ public class SignInDelegate extends MikeDalegate {
     AppCompatTextView textSignIn;
     @BindView(R2.id.icon_sign_in_wechat)
     IconTextView iconSignInWechat;
+
+    private ISignListener mISignListener = null;
 
     private boolean checkFrom() {
         final String phone = editSignInPhone.getText().toString().trim();
@@ -58,6 +58,14 @@ public class SignInDelegate extends MikeDalegate {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener) {
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
+    @Override
     public Object setLayout() {
         return R.layout.delegate_sign_in;
     }
@@ -67,27 +75,28 @@ public class SignInDelegate extends MikeDalegate {
 
     }
 
-
     @OnClick(R2.id.btn_sign_in)
     public void onClickSignIn() {
         RestClient.builder()
                 .url(Constants.LOGIN)
                 .params("username", "13049337194")
                 .params("userpass", "198541")
+                .loader(getContext())
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Logger.i(response);
-                        SignHandler.onSignUp(response);
+                        ToastCreator.showToast(response);
+                        mISignListener.onSignInSuccess();
+                        SignHandler.onSignIn(response, mISignListener);
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(String msg, int code) {
+                        ToastCreator.showToast(msg+"======"+code);
 
                     }
                 })
-
                 .builder()
                 .post();
         start(new SignUpDelegate(), SINGLETASK);
@@ -96,26 +105,6 @@ public class SignInDelegate extends MikeDalegate {
 
     @OnClick(R2.id.text_sign_in)
     public void onClickSignUp() {
-        RestClient.builder()
-                .url(Constants.LOGIN)
-                .params("username", "13049337194")
-                .params("userpass", "198541")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Logger.i(response);
-                     }
-                })
-                .error(new IError() {
-                    @Override
-                    public void onError(String msg, int code) {
-
-                    }
-                })
-
-                .loader(getContext())
-                .builder()
-                .post();
 
     }
 

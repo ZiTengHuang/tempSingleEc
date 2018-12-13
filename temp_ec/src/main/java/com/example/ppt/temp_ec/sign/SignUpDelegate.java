@@ -1,5 +1,6 @@
 package com.example.ppt.temp_ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -8,12 +9,15 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
 import com.example.ppt.temp_coer.dalegates.MikeDalegate;
 import com.example.ppt.temp_coer.net.RestClient;
+import com.example.ppt.temp_coer.net.api.Constants;
 import com.example.ppt.temp_coer.net.callback.IError;
 import com.example.ppt.temp_coer.net.callback.ISuccess;
 import com.example.ppt.temp_ec.R;
 import com.example.ppt.temp_ec.R2;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,6 +38,7 @@ public class SignUpDelegate extends MikeDalegate {
     AppCompatButton btnSignUp;
     @BindView(R2.id.text_sign_in)
     AppCompatTextView textSignIn;
+    private ISignListener mISignListener = null;
 
 
     private boolean checkFrom() {
@@ -77,6 +82,14 @@ public class SignUpDelegate extends MikeDalegate {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener) {
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
+    @Override
     public Object setLayout() {
         return R.layout.delegate_sign_up;
     }
@@ -94,9 +107,24 @@ public class SignUpDelegate extends MikeDalegate {
 
     @OnClick(R2.id.btn_sign_up)
     public void onClickSignUp() {
-        if (checkFrom()) {
+        RestClient.builder()
+                .url(Constants.LOGIN)
+                .params("username", "13049337194")
+                .params("userpass", "198541")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Logger.i(response);
+                        SignHandler.onSignUp(response,mISignListener);
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(String msg, int code) {
 
-
-        }
+                    }
+                })
+                .builder()
+                .post();
     }
 }

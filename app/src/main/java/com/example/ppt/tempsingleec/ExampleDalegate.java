@@ -28,62 +28,6 @@ public class ExampleDalegate extends MikeDalegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-         RestClient.builder()
-                .url(Constants.LOGIN)
-                 .params("username", "13049337194")
-                 .params("userpass", "198541")
-                .loader(getContext())
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Logger.i(response);
-                    }
-                })
-                .error(new IError() {
-                    @Override
-                    public void onError(String msg, int code) {
-                        Logger.i(msg + "===============" + code);
-                    }
-                })
-                .builder()
-                .get();
-        RestClient.builder()
-                .url(Constants.LOGIN)
-                .params("username", "13049337194")
-                .params("userpass", "198541")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Logger.i(response);
-                    }
-                })
-                .error(new IError() {
-                    @Override
-                    public void onError(String msg, int code) {
-                        Logger.i(msg + "===============" + code);
-                    }
-                })
-                .builder()
-                .get();
-
-        RestClient.builder()
-                .url(Constants.LOGIN)
-                .params("username", "13049337194")
-                .params("userpass", "198541")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Logger.i(response);
-                    }
-                })
-                .error(new IError() {
-                    @Override
-                    public void onError(String msg, int code) {
-                        Logger.i(msg + "===============" + code);
-                    }
-                })
-                .builder()
-                .get();
 
 //        RestClient.builder()
 //                .url(Constants.LOGIN)

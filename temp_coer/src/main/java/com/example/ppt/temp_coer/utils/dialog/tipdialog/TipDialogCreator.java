@@ -15,6 +15,8 @@ public class TipDialogCreator {
 
     public static final int DEFAULT_ICON_TYPE_LOADING = QMUITipDialog.Builder.ICON_TYPE_LOADING;
 
+    private static final Handler HANDLER = new Handler();
+
     /**
      * 显示加载框
      */
@@ -24,6 +26,7 @@ public class TipDialogCreator {
                 .setTipWord(msg)
                 .create();
         tipDailog.show();
+        stopDialog();
     }
 
     public static void showTipDailogLoading(Context context) {
@@ -54,6 +57,15 @@ public class TipDialogCreator {
         if (tipDailog.isShowing()) {
             tipDailog.dismiss();
             tipDailog.cancel();
-         }
+        }
+    }
+
+    private static void stopDialog() {
+        HANDLER.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                stopTipDialog();
+            }
+        }, 1500);
     }
 }
