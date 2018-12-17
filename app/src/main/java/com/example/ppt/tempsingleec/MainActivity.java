@@ -7,6 +7,7 @@ import com.example.ppt.temp_coer.utils.toast.ToastCreator;
 import com.example.ppt.temp_ec.luancher.ILuancherListener;
 import com.example.ppt.temp_ec.luancher.OnLancherFinishTag;
 import com.example.ppt.temp_ec.luancher.luancherDalegate;
+import com.example.ppt.temp_ec.main.EcBottomDelegate;
 import com.example.ppt.temp_ec.sign.ISignListener;
 import com.example.ppt.temp_ec.sign.SignInDelegate;
 
@@ -21,6 +22,8 @@ public class MainActivity extends PorxyActivity implements ISignListener, ILuanc
     @Override
     public void onSignInSuccess() {
         ToastCreator.showToast("登录成功");
+        startWithPop(new EcBottomDelegate());
+
     }
 
     @Override
@@ -37,7 +40,6 @@ public class MainActivity extends PorxyActivity implements ISignListener, ILuanc
 
             case NOT_SIGNEN:
                 TipDialogCreator.showTipDailogLoading(this, "启动完成没有登录");
-
                 break;
             default:
                 break;

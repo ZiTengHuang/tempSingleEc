@@ -26,4 +26,5 @@ dependencies {
     //测试用例能再谷歌浏郎器查看到数据库和映射的界面
     implementation 'com.facebook.stetho:stetho:1.4.2'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.4.2'
+    api project(path: ':temp_annotations')
 }

@@ -4,8 +4,9 @@ import android.app.Application;
 
 import com.example.ppt.temp_coer.app.Mike;
 import com.example.ppt.temp_coer.net.api.Constants;
- import com.example.ppt.temp_coer.net.interceptor.TestInterceptor;
+import com.example.ppt.temp_coer.net.interceptor.TestInterceptor;
 import com.example.ppt.temp_ec.database.DataBaseManager;
+import com.example.ppt.temp_ec.icon.FontBottomModel;
 import com.example.ppt.temp_ec.icon.FontTempModel;
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -24,6 +25,7 @@ public class ExampleApp extends Application {
                 .withApiHost(Constants.SERVER)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontTempModel())
+                .withIcon(new FontBottomModel())
                 .withLogger(new AndroidLogAdapter())
                 .withInterceptor(new TestInterceptor())
                 .configurator();
@@ -36,12 +38,12 @@ public class ExampleApp extends Application {
     /**
      * facebook的那个映射库，在googl输入：chrome:inspect查看
      */
-    private void initStetho(){
+    private void initStetho() {
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
-                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-                .build()
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build()
         );
     }
 

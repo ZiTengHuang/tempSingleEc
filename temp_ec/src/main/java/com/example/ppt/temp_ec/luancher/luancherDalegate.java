@@ -35,7 +35,7 @@ public class luancherDalegate extends MikeDalegate implements ITimeListener {
 
     @Override
     public Object setLayout() {
-        return R.layout.dalegate_launcher;
+        return R.layout.delegate_launcher;
     }
     @Override
     public void onAttach(Activity activity) {
