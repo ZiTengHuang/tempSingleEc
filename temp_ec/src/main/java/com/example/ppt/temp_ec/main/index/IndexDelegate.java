@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.ppt.temp_coer.dalegates.bottom.BottomItemDelegate;
+import com.example.ppt.temp_coer.ui.refresh.RefreshHandler;
 import com.example.ppt.temp_ec.R;
 import com.example.ppt.temp_ec.R2;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -26,6 +27,7 @@ public class IndexDelegate extends BottomItemDelegate {
     AppCompatEditText mSearchView = null;
     @BindView(R2.id.icon_message_index)
     IconTextView mMessage = null;
+    private RefreshHandler refreshHandler = null;
 
     private void initRefreshLayout() {
         mSwipeRefreshLayout.setColorSchemeResources(
@@ -49,6 +51,6 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-
+        refreshHandler = new RefreshHandler(mSwipeRefreshLayout);
     }
 }

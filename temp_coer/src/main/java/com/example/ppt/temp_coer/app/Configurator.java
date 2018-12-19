@@ -1,5 +1,7 @@
 package com.example.ppt.temp_coer.app;
 
+import android.os.Handler;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -23,9 +25,13 @@ public class Configurator {
 
     public static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
+    private static final Handler HANDLER = new Handler();
+
     private Configurator() {
         TEMP_CONFIGS.put(ConfigKeys.TEMP_READY, false);
+        TEMP_CONFIGS.put(ConfigKeys.HANDLER, HANDLER);
     }
+
 
 
     public static final Configurator getInstence() {

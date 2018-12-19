@@ -5,7 +5,8 @@ public enum  ConfigKeys {
      API_HOST,
      ICON,
      APPLICATION_CONTENT,
-     INTERCEPTOR
+     INTERCEPTOR,
+     HANDLER
 
 }
 

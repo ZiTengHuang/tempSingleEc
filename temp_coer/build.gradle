@@ -75,4 +75,6 @@ dependencies {
     //微信包含统计
     //noinspection GradleDynamicVersion
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
 }

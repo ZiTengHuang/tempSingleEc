@@ -17,6 +17,7 @@ import com.example.ppt.temp_coer.net.callback.ISuccess;
 import com.example.ppt.temp_coer.utils.toast.ToastCreator;
 import com.example.ppt.temp_ec.R;
 import com.example.ppt.temp_ec.R2;
+import com.example.ppt.temp_ec.main.EcBottomDelegate;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.orhanobut.logger.Logger;
 
@@ -99,7 +100,6 @@ public class SignInDelegate extends MikeDalegate {
                 })
                 .builder()
                 .post();
-        start(new SignUpDelegate(), SINGLETASK);
 
     }
 
@@ -111,5 +111,6 @@ public class SignInDelegate extends MikeDalegate {
     @OnClick(R2.id.icon_sign_in_wechat)
     public void onClickWechat() {
         Toast.makeText(getContext(), "你妹", Toast.LENGTH_LONG).show();
+        startWithPop(new EcBottomDelegate());
     }
 }
