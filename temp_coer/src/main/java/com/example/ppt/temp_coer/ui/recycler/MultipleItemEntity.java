@@ -13,6 +13,15 @@ public class MultipleItemEntity implements MultiItemEntity {
     private final LinkedHashMap<Object, Object> MULTIPLE_FIELDS = new LinkedHashMap<>();
     private final SoftReference<LinkedHashMap<Object, Object>> FIELDS_REFERENCE = new SoftReference<>(MULTIPLE_FIELDS, ITEM_QUENE);
 
+
+    public MultipleItemEntity(LinkedHashMap<Object, Object> fields) {
+        FIELDS_REFERENCE.get().putAll(fields);
+    }
+
+    public  static   MultipleItemEntityBuilder builder() {
+        return new MultipleItemEntityBuilder();
+    }
+
     /**
      * 强制实现的各种布局的接口
      *
@@ -31,8 +40,8 @@ public class MultipleItemEntity implements MultiItemEntity {
         return FIELDS_REFERENCE.get();
     }
 
-    public final MultipleItemEntity setFields(Object key,Object value){
-        FIELDS_REFERENCE.get().put(key,value);
+    public final MultipleItemEntity setFields(Object key, Object value) {
+        FIELDS_REFERENCE.get().put(key, value);
         return this;
     }
 
