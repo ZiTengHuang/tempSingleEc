@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatTextView
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="分类"
-        android:gravity="center"
-        />
+        android:baselineAligned="true"
+        android:orientation="horizontal">
 
+        <com.qmuiteam.qmui.layout.QMUIFrameLayout
+            android:background="@color/qmui_config_color_white"
+            android:id="@+id/fl_sort_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.qmuiteam.qmui.layout.QMUIFrameLayout
+            android:background="@color/qmui_config_color_white"
+
+            android:id="@+id/fl_sort_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="2.5" />
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
 </android.support.constraint.ConstraintLayout>

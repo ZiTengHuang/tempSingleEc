@@ -123,7 +123,6 @@ public class RestClient {
         if (call != null) {
             call.enqueue(getRequestCallBack());
         }
-
     }
 
     private Callback<String> getRequestCallBack() {

@@ -17,7 +17,7 @@ import java.util.List;
 public class MultipRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItemEntity, MultipViewHolder> implements BaseQuickAdapter.SpanSizeLookup {
 
 
-    public MultipRecyclerAdapter(List<MultipleItemEntity> data) {
+    protected MultipRecyclerAdapter(List<MultipleItemEntity> data) {
         super(data);
         init();
     }

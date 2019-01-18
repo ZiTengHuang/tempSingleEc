@@ -95,7 +95,6 @@ public class luancherDalegate extends MikeDalegate implements ITimeListener {
                 public void onSignIn() {
                     if (mILuancherListener != null) {
                         mILuancherListener.onLuancherFinish(OnLancherFinishTag.SIGNEN);
-
                     }
                 }
                 @Override

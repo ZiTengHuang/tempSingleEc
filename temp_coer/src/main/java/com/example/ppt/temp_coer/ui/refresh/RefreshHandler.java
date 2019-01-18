@@ -1,17 +1,12 @@
 package com.example.ppt.temp_coer.ui.refresh;
-
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.ppt.temp_coer.app.Mike;
-import com.example.ppt.temp_coer.net.RestClient;
-import com.example.ppt.temp_coer.net.callback.ISuccess;
 import com.example.ppt.temp_coer.ui.recycler.DataConverter;
 import com.example.ppt.temp_coer.ui.recycler.MultipRecyclerAdapter;
-import com.orhanobut.logger.Logger;
 
 public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 

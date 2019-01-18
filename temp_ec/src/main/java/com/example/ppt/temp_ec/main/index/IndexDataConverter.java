@@ -50,7 +50,6 @@ public final class IndexDataConverter extends DataConverter {
                     .setField(MultipleFields.BANNERS,bannerImages)
                     .build();
             ENTITYS.add(entity);
-
         }
         return ENTITYS;
     }

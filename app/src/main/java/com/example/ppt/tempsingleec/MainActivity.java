@@ -23,9 +23,7 @@ public class MainActivity extends PorxyActivity implements ISignListener, ILuanc
     public void onSignInSuccess() {
         ToastCreator.showToast("登录成功");
         startWithPop(new EcBottomDelegate());
-
     }
-
     @Override
     public void onSignUpSuccess() {
         TipDialogCreator.showTipDailogLoading(this, "注册成功");
